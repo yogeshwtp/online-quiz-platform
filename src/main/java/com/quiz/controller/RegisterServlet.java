@@ -7,35 +7,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class RegisterServlet
- */
-@WebServlet("/RegisterServlet")
+import com.quiz.dao.UserDao;
+import com.quiz.model.User;
+
+// This annotation maps the servlet to the URL path "/register"
+@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    private static final long serialVersionUID = 1L;
+    private UserDao userDao;
+
+    // Initialize the UserDao when the servlet is created
+    public void init() {
+        userDao = new UserDao();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+    // Handles POST requests from the registration form
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        
+        User newUser = new User();
+        newUser.setUsername(username);
+        newUser.setEmail(email);
+        newUser.setPassword(password); // Again, HASH this in a real project
+        
+        userDao.registerUser(newUser);
+        
+        // After registering, redirect the user to the login page
+        response.sendRedirect("login.jsp");
+    }
 }

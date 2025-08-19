@@ -1,0 +1,78 @@
+/* Basic styling for the entire page */
+body {
+    font-family: Arial, sans-serif; /* Use a clean, modern font */
+    background-color: #f4f4f9; /* A light grey background */
+    display: flex; /* Enable flexbox for easy centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Make the body take up the full viewport height */
+    margin: 0;
+}
+
+/* The main container for the form */
+.form-container {
+    background-color: #ffffff; /* White background for the form */
+    padding: 2em; /* Add some internal spacing */
+    border-radius: 8px; /* Give it rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    width: 300px; /* Set a fixed width */
+}
+
+/* Style the main heading */
+h2 {
+    text-align: center; /* Center the "Create an Account" text */
+    color: #333;
+    margin-bottom: 1em;
+}
+
+/* Style the form elements for better layout */
+.form-group {
+    margin-bottom: 1em; /* Space out the form groups (label + input) */
+}
+
+.form-group label {
+    display: block; /* Make labels take up their own line */
+    margin-bottom: 5px; /* Add a little space below the label */
+    color: #555;
+}
+
+.form-group input {
+    width: 100%; /* Make input fields take the full width of the container */
+    padding: 10px; /* Add some padding inside the input fields */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important for width and padding to work together */
+}
+
+/* Style the submit button */
+.btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5c67f2; /* A nice blue color */
+    color: white;
+    font-size: 16px;
+    cursor: pointer; /* Change cursor to a pointer on hover */
+    margin-top: 1em;
+}
+
+.btn:hover {
+    background-color: #4a54e1; /* A slightly darker blue on hover */
+}
+
+/* Style the login link at the bottom */
+.login-link {
+    text-align: center;
+    margin-top: 1em;
+    color: #777;
+}
+
+.login-link a {
+    color: #5c67f2;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
