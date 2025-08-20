@@ -377,3 +377,8 @@ table td {
 table td strong {
     font-weight: 700;
 }
+/* In style.css */
+textarea.form-control {
+    height: auto; /* Allow it to respect the 'rows' attribute */
+    font-family: 'Poppins', sans-serif; /* Ensure consistent font */
+}

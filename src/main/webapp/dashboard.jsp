@@ -21,8 +21,7 @@
                 <li class="nav-item active"><a href="#"><i data-feather="grid"></i> Dashboard</a></li>
                 <!-- Change this line in all sidebars -->
 				<li class="nav-item"><a href="my-results"><i data-feather="check-square"></i> My Results</a></li>
-                <li class="nav-item"><a href="#"><i data-feather="user"></i> Profile</a></li>
-            </ul>
+				<li class="nav-item"><a href="profile"><i data-feather="user"></i> Profile</a></li>            </ul>
             <div class="sidebar-footer">
                 <a href="logout"><i data-feather="log-out"></i> Logout</a>
             </div>
@@ -35,16 +34,19 @@
             </header>
 
             <section class="quiz-list">
-                <div class="quiz-cards-container">
-                    <c:forEach var="quiz" items="${quizList}">
-                        <div class="card">
-                            <h3 class="card-title"><c:out value="${quiz.subject}" /></h3>
-                            <p class="card-description">A series of questions on this topic.</p>
-                            <a href="quiz?quizId=${quiz.id}" class="btn">Start Quiz</a>
-                        </div>
-                    </c:forEach>
-                </div>
-            </section>
+    			<c:forEach var="categoryEntry" items="${quizzesByCategory}">
+       				 <h3 class="category-title">${categoryEntry.key}</h3>
+       				 <div class="quiz-cards-container">
+           		 <c:forEach var="quiz" items="${categoryEntry.value}">
+            	  		  <div class="card">
+              	   		   <h3 class="card-title"><c:out value="${quiz.subject}" /></h3>
+                		  		  <p class="card-description">A series of questions on this topic.</p>
+                		  		  <a href="quiz?quizId=${quiz.id}" class="btn">Start Quiz</a>
+              				  </div>
+          		 		 </c:forEach>
+       				 </div>
+  		 		 </c:forEach>
+			</section>
         </main>
     </div>
 

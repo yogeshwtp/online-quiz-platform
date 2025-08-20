@@ -21,8 +21,7 @@
                 <li class="nav-item"><a href="dashboard"><i data-feather="grid"></i> Dashboard</a></li>
 				<!-- Change this line in all sidebars -->
 				<li class="nav-item"><a href="my-results"><i data-feather="check-square"></i> My Results</a></li>
-                <li class="nav-item"><a href="#"><i data-feather="user"></i> Profile</a></li>
-            </ul>
+				<li class="nav-item"><a href="profile"><i data-feather="user"></i> Profile</a></li>            </ul>
             <div class="sidebar-footer">
                 <a href="logout"><i data-feather="log-out"></i> Logout</a>
             </div>
