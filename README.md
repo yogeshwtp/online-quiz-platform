@@ -8,8 +8,6 @@ The project features a modern, responsive user interface and demonstrates core b
 
 ## 📸 Screenshot  
 ![App Screenshot](https://your-screenshot-link-here)  
-*(Replace with your own screenshot link)*  
-
 ---
 
 ## ✨ Key Features  
