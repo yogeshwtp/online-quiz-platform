@@ -7,8 +7,7 @@ The project features a modern, responsive user interface and demonstrates core b
 ---
 
 ## 📸 Screenshot  
-![App Screenshot](https://your-screenshot-link-here)  
----
+
 
 ## ✨ Key Features  
 - 🔐 **User Authentication**: Secure registration and login functionality  
