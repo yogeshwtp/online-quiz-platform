@@ -56,8 +56,10 @@ public class QuizServlet extends HttpServlet {
             }
         }
         
+     // In com.quiz.controller.QuizServlet.java, inside the doPost method
         User user = (User) request.getSession().getAttribute("currentUser");
-        resultDao.saveResult(user.getId(), quizId, score);
+        // Update this line to include the question count
+        resultDao.saveResult(user.getId(), quizId, score, questions.size());
 
         request.setAttribute("score", score);
         request.setAttribute("totalQuestions", questions.size());

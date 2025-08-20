@@ -1,49 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%-- Security Check --%>
+<% if (session.getAttribute("currentUser") == null) { response.sendRedirect("login.jsp"); return; } %>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dash board</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h3>Quizzer</h3>
-        </div>
-        <ul class="sidebar-nav">
-            <li class="active"><a href="#"><i data-feather="grid"></i> Dashboard</a></li>
-            <li><a href="#"><i data-feather="message-square"></i> My Results</a></li>
-            <li><a href="#"><i data-feather="user"></i> Profile</a></li>
-        </ul>
-        <div class="sidebar-footer">
-            <a href="logout"><i data-feather="log-out"></i> Logout</a>
-        </div>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Quizzer</h2>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="nav-item active"><a href="#"><i data-feather="grid"></i> Dashboard</a></li>
+                <!-- Change this line in all sidebars -->
+				<li class="nav-item"><a href="my-results"><i data-feather="check-square"></i> My Results</a></li>
+                <li class="nav-item"><a href="#"><i data-feather="user"></i> Profile</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="logout"><i data-feather="log-out"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Welcome, ${currentUser.username}!</h1>
+                <p>Select a quiz to test your knowledge.</p>
+            </header>
+
+            <section class="quiz-list">
+                <div class="quiz-cards-container">
+                    <c:forEach var="quiz" items="${quizList}">
+                        <div class="card">
+                            <h3 class="card-title"><c:out value="${quiz.subject}" /></h3>
+                            <p class="card-description">A series of questions on this topic.</p>
+                            <a href="quiz?quizId=${quiz.id}" class="btn">Start Quiz</a>
+                        </div>
+                    </c:forEach>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <main class="main-content">
-        <header class="main-header">
-            <h2>Welcome, ${currentUser.username}!</h2>
-        </header>
-
-        <section class="quiz-list">
-            <h3>Available Quizzes</h3>
-            <div class="quiz-cards">
-                <c:forEach var="quiz" items="${quizList}">
-                    <div class="card">
-                        <h4><c:out value="${quiz.subject}" /></h4>
-                        <p>A set of questions to test your knowledge.</p>
-                        <a href="quiz?quizId=${quiz.id}" class="btn">Start Quiz</a>
-                    </div>
-                </c:forEach>
-            </div>
-        </section>
-    </main>
-    
     <script>
-      feather.replace(); // Activates the Feather Icons
+      feather.replace(); // This activates the icons
     </script>
 </body>
 </html>

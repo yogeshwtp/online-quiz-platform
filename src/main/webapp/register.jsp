@@ -1,36 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register - Online Quiz</title>
-    <%-- Link to your new stylesheet --%>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Quizzer</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
-<body>
-    <div class="form-container">
-        <h2>Create an Account</h2>
-		<form action="register" method="post">            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            
+<body class="auth-body">
+
+    <div class="card auth-card">
+        <h2 class="card-title text-center">Create an Account</h2>
+
+        <form action="register" method="post">
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" required>
             </div>
-            
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required>
             </div>
-            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
             <button type="submit" class="btn">Register</button>
         </form>
-        
-        <div class="login-link">
-             <p>Already have an account? <a href="login.jsp">Login here</a></p>
-        </div>
+
+        <p class="auth-link">
+            Already have an account? <a href="login.jsp">Login here</a>
+        </p>
     </div>
+
 </body>
 </html>
