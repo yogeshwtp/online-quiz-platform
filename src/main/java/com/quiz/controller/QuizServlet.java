@@ -13,6 +13,8 @@ import com.quiz.dao.QuestionDao;
 import com.quiz.dao.ResultDao;
 import com.quiz.model.Question;
 import com.quiz.model.User;
+import com.quiz.model.Option;
+
 
 @WebServlet("/quiz")
 public class QuizServlet extends HttpServlet {
@@ -43,7 +45,7 @@ public class QuizServlet extends HttpServlet {
             if (userAnswer != null) {
                 // Find the correct option id
                 int correctOptionId = -1;
-                for(var option : question.getOptions()){
+                for(Option option : question.getOptions()){
                     if(option.isCorrect()){
                         correctOptionId = option.getId();
                         break;

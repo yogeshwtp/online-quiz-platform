@@ -20,6 +20,7 @@
             <ul class="sidebar-nav">
                 <li class="nav-item active"><a href="#"><i data-feather="grid"></i> Dashboard</a></li>
                 <!-- Change this line in all sidebars -->
+                <li class="nav-item"><a href="create-course.jsp"><i data-feather="plus-circle"></i> Create Course</a></li>
 				<li class="nav-item"><a href="my-results"><i data-feather="check-square"></i> My Results</a></li>
 				<li class="nav-item"><a href="profile"><i data-feather="user"></i> Profile</a></li>            </ul>
             <div class="sidebar-footer">
@@ -32,7 +33,6 @@
                 <h1>Welcome, ${currentUser.username}!</h1>
                 <p>Select a quiz to test your knowledge.</p>
             </header>
-
             <section class="quiz-list">
     			<c:forEach var="categoryEntry" items="${quizzesByCategory}">
        				 <h3 class="category-title">${categoryEntry.key}</h3>
