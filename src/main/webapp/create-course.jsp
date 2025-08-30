@@ -13,7 +13,7 @@
 <body>
     <div class="app-container">
         <aside class="sidebar">
-            <div class="sidebar-header"><h2>Quizzer</h2></div>
+            <div class="sidebar-header"><h2>LEARN-ED</h2></div>
             <ul class="sidebar-nav">
                 <li class="nav-item"><a href="dashboard"><i data-feather="grid"></i> Dashboard</a></li>
                 <li class="nav-item active"><a href="create-course.jsp"><i data-feather="plus-circle"></i> Create Course</a></li>

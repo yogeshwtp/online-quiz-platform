@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Quizzer</title>
+    <title>Login - LEARN-ED</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body class="auth-body">
 
     <div class="card auth-card">
-        <h2 class="card-title text-center">Login</h2>
+        <h2 class="card-title text-center">Welcome Back!</h2>
         
+        <%-- Display an error message if the login fails --%>
         <% if ("1".equals(request.getParameter("error"))) { %>
             <p class="error-message">Invalid username or password.</p>
         <% } %>

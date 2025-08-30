@@ -15,7 +15,7 @@
     <div class="app-container">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>Quizzer</h2>
+                <h2>LEARN-ED</h2>
             </div>
             <ul class="sidebar-nav">
                 <li class="nav-item active"><a href="#"><i data-feather="grid"></i> Dashboard</a></li>

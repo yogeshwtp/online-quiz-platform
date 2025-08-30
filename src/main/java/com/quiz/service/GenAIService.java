@@ -1,19 +1,51 @@
 package com.quiz.service;
 
+// Required imports for reading the properties file and for the HTTP client
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Properties;
 import org.json.JSONObject;
+import com.quiz.util.DBConnection; // Import DBConnection to find the properties file
 
 public class GenAIService {
-    // --- ACTION REQUIRED ---
-    private static final String API_KEY = "AIzaSyBRN7YuyifG8xZqwxO_pKCf5khm6AzuJsY";
+
+    // --- This block replaces the old hardcoded API_KEY line ---
+    private static String API_KEY;
+
+    /**
+     * This is a static initializer block. It runs once when the class is first loaded.
+     * Its job is to read the 'db.properties' file and load the api.key value.
+     */
+    static {
+        Properties props = new Properties();
+        try (InputStream input = DBConnection.class.getClassLoader().getResourceAsStream("db.properties")) {
+            if (input == null) {
+                System.err.println("ERROR: db.properties file not found in classpath.");
+            } else {
+                props.load(input);
+                API_KEY = props.getProperty("api.key");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    // --- End of the new block ---
+
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=";
 
     public String generateCourseContent(String topic, String level) {
+        // Check if the API key was loaded successfully
+        if (API_KEY == null || API_KEY.trim().isEmpty()) {
+            System.err.println("API Key is missing. Please check your db.properties file.");
+            return null;
+        }
+        
         try {
-            // This prompt asks the AI for both learning material and a quiz
+            // The prompt asks the AI for both learning material and a quiz
             String prompt = String.format(
                 "Create a short, personalized learning course on the topic of '%s' for a '%s' level learner. " +
                 "The course should have a title, a brief introduction, and 3 distinct lesson sections. Each lesson must have a title and a paragraph of learning material. " +
@@ -36,7 +68,7 @@ public class GenAIService {
             // 2. Create the HTTP Client and Request
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL + API_KEY)) // Append the key to the URL
+                .uri(URI.create(API_URL + API_KEY)) // This now uses the securely loaded API_KEY
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();

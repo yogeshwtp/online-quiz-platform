@@ -15,11 +15,12 @@
     <div class="app-container">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>Quizzer</h2>
+                <h2>LEARN-ED</h2>
             </div>
             <ul class="sidebar-nav">
                 <li class="nav-item"><a href="dashboard"><i data-feather="grid"></i> Dashboard</a></li>
 				<!-- Change this line in all sidebars -->
+				<li class="nav-item"><a href="create-course.jsp"><i data-feather="plus-circle"></i> Create Course</a></li>
 				<li class="nav-item"><a href="my-results"><i data-feather="check-square"></i> My Results</a></li>
 				<li class="nav-item"><a href="profile"><i data-feather="user"></i> Profile</a></li>            </ul>
             <div class="sidebar-footer">

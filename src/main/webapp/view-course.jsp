@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Course - ${course.title}</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <script src="https://unpkg.com/feather-icons"></script>
@@ -12,7 +14,15 @@
 <body>
     <div class="app-container">
         <aside class="sidebar">
-            </aside>
+            <div class="sidebar-header"><h2>LEARN-ED</h2></div>
+            <ul class="sidebar-nav">
+                <li class="nav-item"><a href="dashboard"><i data-feather="grid"></i> Dashboard</a></li>
+                <li class="nav-item active"><a href="create-course.jsp"><i data-feather="plus-circle"></i> Create Course</a></li>
+                <li class="nav-item"><a href="my-results"><i data-feather="check-square"></i> My Results</a></li>
+                <li class="nav-item"><a href="profile"><i data-feather="user"></i> Profile</a></li>
+            </ul>
+            <div class="sidebar-footer"><a href="logout"><i data-feather="log-out"></i> Logout</a></div>
+        </aside>
 
         <main class="main-content">
             <header class="main-header">
@@ -20,12 +30,19 @@
                 <p>${course.introduction}</p>
             </header>
 
+            <%-- Add a separator line after the introduction --%>
+            <hr class="section-separator">
+
             <div class="course-content">
-                <c:forEach var="lesson" items="${course.lessons}">
+                <c:forEach var="lesson" items="${course.lessons}" varStatus="loop">
                     <div class="card">
                         <h3 class="card-title">${lesson.title}</h3>
                         <p class="card-description">${lesson.material}</p>
                     </div>
+                    <%-- Add a separator line between lessons, but not after the last one --%>
+                    <c:if test="${!loop.last}">
+                        <hr class="lesson-separator">
+                    </c:if>
                 </c:forEach>
             </div>
         </main>
