@@ -1,14 +1,20 @@
+/* --- Global Settings & Variables --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 :root {
     --primary: #BCD39C;
-    --background: #EAFDCF;
-    --text-dark: #8E8358;
-    --white-transparent-heavy: rgba(255, 255, 255, 0.6);
-    --white-transparent-light: rgba(255, 255, 255, 0.5);
+    --background: #F0FCEC;
+    --text-dark: #6E6338;
+    --text-light: #9E9368;
     --white: #FFFFFF;
     --light-gray: #eee;
-    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow: rgba(0, 0, 0, 0.08);
+    --success-bg: #d4edda;
+    --success-border: #c3e6cb;
+    --success-text: #155724;
+    --error-bg: #f8d7da;
+    --error-border: #f5c6cb;
+    --error-text: #721c24;
 }
 
 * {
@@ -23,6 +29,7 @@ body {
     color: var(--text-dark);
 }
 
+/* --- Main Application Layout --- */
 .app-container {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -30,21 +37,19 @@ body {
 }
 
 .sidebar {
-    background: var(--white-transparent-heavy);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: var(--white);
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    border-right: 1px solid var(--light-gray);
 }
 
 .main-content {
-    flex-grow: 1;
     padding: 2rem 3rem;
     overflow-y: auto;
 }
 
+/* --- Sidebar Components --- */
 .sidebar-header h2 {
     font-weight: 700;
     margin-bottom: 2rem;
@@ -84,49 +89,32 @@ body {
     color: var(--text-dark);
 }
 
+/* --- Main Content & General Components --- */
 .main-header h1 {
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
     font-weight: 700;
 }
 
 .main-header p {
-    color: #999;
-}
-
-.quiz-cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    color: var(--text-light);
 }
 
 .card {
-    background: var(--white-transparent-light);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 var(--shadow);
-    padding: 1.5rem;
+    background: var(--white);
+    box-shadow: 0 4px 12px var(--shadow);
     border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    animation: fadeIn 0.5s ease-out forwards;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.15);
-}
-
-.card-title {
-    font-size: clamp(1.1rem, 3vw, 1.25rem);
-    margin-bottom: 0.5rem;
+    box-shadow: 0 8px 20px var(--shadow);
 }
 
 .btn {
-    display: block;
-    width: 100%;
-    padding: 0.8rem;
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
     background-color: var(--primary);
     color: var(--text-dark);
     border: none;
@@ -135,7 +123,7 @@ body {
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
-    transition: transform 0.2s, filter 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
 }
 
 .btn:hover {
@@ -146,9 +134,119 @@ body {
     transform: scale(0.98);
 }
 
-/* Add other component styles (quiz page, results, etc.) here */
+hr {
+    border: none;
+    border-top: 1px solid var(--light-gray);
+    margin: 2rem 0;
+}
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* --- Authentication Page Styles --- */
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.error-message {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-border);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* --- Dashboard Page Styles --- */
+.dashboard-section {
+    margin-top: 2.5rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* --- Quiz Page & Results Styles --- */
+.quiz-container {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.question-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+.question-block:last-child {
+    border-bottom: none;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Instant Results Styling */
+.results-summary {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.submitted .option-label:not(.correct-answer):not(.incorrect-answer) {
+    opacity: 0.6;
+}
+
+.submitted .option-label.correct-answer {
+    background-color: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success-text);
+    font-weight: 700;
+}
+
+.submitted .option-label.incorrect-answer {
+    background-color: var(--error-bg);
+    border-color: var(--error-border);
+    color: var(--error-text);
 }

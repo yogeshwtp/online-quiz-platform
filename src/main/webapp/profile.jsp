@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <script src="https://unpkg.com/feather-icons"></script>
@@ -16,6 +17,7 @@
             <div class="sidebar-header"><h2>LEARN-ED</h2></div>
             <ul class="sidebar-nav">
                 <li class="nav-item"><a href="dashboard"><i data-feather="grid"></i> Dashboard</a></li>
+                <li class="nav-item"><a href="create-course.jsp"><i data-feather="plus-circle"></i> Create Course</a></li>
                 <li class="nav-item"><a href="my-results"><i data-feather="check-square"></i> My Results</a></li>
                 <li class="nav-item active"><a href="profile"><i data-feather="user"></i> Profile</a></li>
             </ul>
@@ -38,7 +40,7 @@
                         <label>Email</label>
                         <input type="email" class="form-control" value="${user.email}" disabled>
                     </div>
-                    <hr style="margin: 2rem 0;">
+                    <hr>
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
                         <input type="text" id="fullName" name="fullName" class="form-control" value="${userProfile.fullName}">
@@ -52,6 +54,8 @@
             </div>
         </main>
     </div>
-    <script>feather.replace();</script>
+    <script>
+      feather.replace();
+    </script>
 </body>
 </html>

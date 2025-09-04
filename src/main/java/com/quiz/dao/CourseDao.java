@@ -104,6 +104,35 @@ public class CourseDao {
     }
 
     /**
+     * Retrieves all courses created by a specific user.
+     * @param userId The ID of the user whose courses are to be fetched.
+     * @return A list of Course objects.
+     */
+    public List<Course> getCoursesByUserId(int userId) {
+        List<Course> courses = new ArrayList<>();
+        // This SQL query now has a WHERE clause to filter by the user ID
+        String sql = "SELECT * FROM courses WHERE created_by_user_id = ?";
+        
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Course course = new Course();
+                course.setId(rs.getInt("id"));
+                course.setTitle(rs.getString("title"));
+                course.setIntroduction(rs.getString("introduction"));
+                // We don't need the lessons for the dashboard view
+                courses.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courses;
+    }
+    /**
      * Retrieves a single course and its associated lessons from the database.
      * @param courseId The ID of the course to fetch.
      * @return A Course object, complete with its list of lessons.
@@ -112,7 +141,7 @@ public class CourseDao {
         Course course = null;
         String courseSql = "SELECT * FROM courses WHERE id = ?";
         String lessonSql = "SELECT * FROM lessons WHERE course_id = ?";
-        
+        String quizSql = "SELECT id FROM quizzes WHERE subject = ?";
         try (Connection conn = DBConnection.getConnection()) {
             // Get course details
             try (PreparedStatement stmt = conn.prepareStatement(courseSql)) {
@@ -123,6 +152,13 @@ public class CourseDao {
                     course.setId(rs.getInt("id"));
                     course.setTitle(rs.getString("title"));
                     course.setIntroduction(rs.getString("introduction"));
+                }
+            }
+            try (PreparedStatement stmt = conn.prepareStatement(quizSql)) {
+                stmt.setString(1, course.getTitle()); // It uses the course title to find the quiz
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    course.setQuizId(rs.getInt("id"));
                 }
             }
             
@@ -140,7 +176,7 @@ public class CourseDao {
                         lesson.setMaterial(rs.getString("material"));
                         lessons.add(lesson);
                     }
-                    course.setLessons(lessons);
+                    course.setLessons(lessons); // Assumes you have a List<Lesson> field in your Course model
                 }
             }
         } catch (SQLException e) {

@@ -17,7 +17,7 @@
             <div class="sidebar-header"><h2>LEARN-ED</h2></div>
             <ul class="sidebar-nav">
                 <li class="nav-item"><a href="dashboard"><i data-feather="grid"></i> Dashboard</a></li>
-                <li class="nav-item active"><a href="create-course.jsp"><i data-feather="plus-circle"></i> Create Course</a></li>
+                <li class="nav-item"><a href="create-course.jsp"><i data-feather="plus-circle"></i> Create Course</a></li>
                 <li class="nav-item"><a href="my-results"><i data-feather="check-square"></i> My Results</a></li>
                 <li class="nav-item"><a href="profile"><i data-feather="user"></i> Profile</a></li>
             </ul>
@@ -30,23 +30,29 @@
                 <p>${course.introduction}</p>
             </header>
 
-            <%-- Add a separator line after the introduction --%>
-            <hr class="section-separator">
-
-            <div class="course-content">
-                <c:forEach var="lesson" items="${course.lessons}" varStatus="loop">
-                    <div class="card">
+            <div class="card-container">
+                <c:forEach var="lesson" items="${course.lessons}">
+                    <div class="card lesson-card">
                         <h3 class="card-title">${lesson.title}</h3>
-                        <p class="card-description">${lesson.material}</p>
+                        <p>${lesson.material}</p>
                     </div>
-                    <%-- Add a separator line between lessons, but not after the last one --%>
-                    <c:if test="${!loop.last}">
-                        <hr class="lesson-separator">
-                    </c:if>
                 </c:forEach>
+            </div>
+
+            <hr>
+            <div class="card-container">
+                <div class="card">
+                    <h3 class="card-title">Test Your Knowledge</h3>
+                    <div class="action-buttons">
+                        <a href="quiz?quizId=${course.quizId}" class="btn">Start Quiz</a>
+                    
+                    </div>
+                </div>
             </div>
         </main>
     </div>
-    <script>feather.replace();</script>
+    <script>
+      feather.replace();
+    </script>
 </body>
 </html>

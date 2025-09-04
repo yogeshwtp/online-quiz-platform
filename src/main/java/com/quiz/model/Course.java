@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Course {
     private int id;
+    private int quizId; // Make sure this line exists
     private String title;
     private String introduction;
     private List<Lesson> lessons; // Added to hold the lessons for a course
@@ -11,6 +12,9 @@ public class Course {
     // --- Getters and Setters ---
     public int getId() {
         return id;
+    }
+    public int getQuizId() {
+        return quizId;
     }
     public void setId(int id) {
         this.id = id;
@@ -29,6 +33,9 @@ public class Course {
     }
     public List<Lesson> getLessons() {
         return lessons;
+    }
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
     }
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;

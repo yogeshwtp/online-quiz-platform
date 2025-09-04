@@ -2,6 +2,8 @@ package com.quiz.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,33 +42,51 @@ public class QuizServlet extends HttpServlet {
         List<Question> questions = questionDao.getQuestionsByQuizId(quizId);
         int score = 0;
 
+        // A map to store the user's answers: Key = questionId, Value = selectedOptionId
+        Map<Integer, Integer> userAnswers = new HashMap<>();
+        
+        // A map to store the correctness of each answer: Key = questionId, Value = boolean
+        Map<Integer, Boolean> answerCorrectness = new HashMap<>();
+
         for (Question question : questions) {
-            String userAnswer = request.getParameter("question_" + question.getId());
-            if (userAnswer != null) {
-                // Find the correct option id
+            String userAnswerStr = request.getParameter("question_" + question.getId());
+            if (userAnswerStr != null) {
+                int userAnswerId = Integer.parseInt(userAnswerStr);
+                userAnswers.put(question.getId(), userAnswerId);
+
                 int correctOptionId = -1;
-                for(Option option : question.getOptions()){
-                    if(option.isCorrect()){
+                for (Option option : question.getOptions()) {
+                    if (option.isCorrect()) {
                         correctOptionId = option.getId();
                         break;
                     }
                 }
-                // Check if the user's selected option is the correct one
-                if (Integer.parseInt(userAnswer) == correctOptionId) {
+
+                if (userAnswerId == correctOptionId) {
                     score++;
+                    answerCorrectness.put(question.getId(), true);
+                } else {
+                    answerCorrectness.put(question.getId(), false);
                 }
             }
         }
         
-     // In com.quiz.controller.QuizServlet.java, inside the doPost method
+        // Save the result to the database (optional, but good to keep)
         User user = (User) request.getSession().getAttribute("currentUser");
-        // Update this line to include the question count
-        resultDao.saveResult(user.getId(), quizId, score, questions.size());
+        if (user != null) {
+            resultDao.saveResult(user.getId(), quizId, score, questions.size());
+        }
 
+        // Pass all the necessary data back to the quiz.jsp page
+        request.setAttribute("questions", questions);
+        request.setAttribute("quizId", quizId);
         request.setAttribute("score", score);
         request.setAttribute("totalQuestions", questions.size());
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("results.jsp");
+        request.setAttribute("userAnswers", userAnswers);
+        request.setAttribute("answerCorrectness", answerCorrectness);
+        request.setAttribute("submitted", true); // A flag to indicate the quiz has been submitted
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("quiz.jsp");
         dispatcher.forward(request, response);
     }
 }

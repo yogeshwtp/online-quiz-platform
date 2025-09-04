@@ -48,8 +48,8 @@ public class GenAIService {
             // The prompt asks the AI for both learning material and a quiz
             String prompt = String.format(
                 "Create a short, personalized learning course on the topic of '%s' for a '%s' level learner. " +
-                "The course should have a title, a brief introduction, and 3 distinct lesson sections. Each lesson must have a title and a paragraph of learning material. " +
-                "After the lessons, create a 3-question multiple-choice quiz based on the material. Each question must have 3 options, with only one being correct. " +
+                "The course should have a title, a brief introduction, and 10 distinct lesson sections. Each lesson must have a title and a paragraph of learning material. " +
+                "After the lessons, create a 10-question multiple-choice quiz based on the material. Each question must have 4 options, with only one being correct. " +
                 "Return the output ONLY as a single, valid JSON object. Do not include any text, markdown formatting like ```json, or any other characters before or after the JSON. " +
                 "The JSON must strictly follow this structure: " +
                 "{\"courseTitle\": \"...\", \"introduction\": \"...\", \"lessons\": [{\"lessonTitle\": \"...\", \"material\": \"...\"}], \"quiz\": [{\"questionText\": \"...\", \"options\": [{\"optionText\": \"...\", \"isCorrect\": boolean}]}]}",
