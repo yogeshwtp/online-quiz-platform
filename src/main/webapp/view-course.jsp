@@ -40,16 +40,17 @@
             </div>
 
             <hr>
-            <div class="card-container">
-                <div class="card">
-                    <h3 class="card-title">Test Your Knowledge</h3>
-                    <div class="action-buttons">
-                        <a href="quiz?quizId=${course.quizId}" class="btn">Start Quiz</a>
-                    
-                    </div>
-                </div>
-            </div>
-        </main>
+<div class="quiz-section">
+    <div class="card">
+        <h3 class="card-title">Test Your Knowledge</h3>
+        <p class="card-description">Take a short quiz or download the course material as a PDF.</p>
+        
+        <div class="action-buttons">
+            <a href="quiz?quizId=${course.quizId}" class="btn">Start Quiz</a>
+<a href="downloadCourse?id=${course.id}" class="btn btn-secondary" target="_blank">Download as PDF</a>        </div>
+    </div>
+</div>
+</main>
     </div>
     <script>
       feather.replace();

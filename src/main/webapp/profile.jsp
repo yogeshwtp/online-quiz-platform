@@ -52,10 +52,72 @@
                     <button type="submit" class="btn">Save Changes</button>
                 </form>
             </div>
+            <section class="dashboard-section">
+    <h2 class="section-title">Performance Overview</h2>
+    <div class="stats-container">
+        <div class="chart-card card">
+            <canvas id="performanceChart"></canvas>
+        </div>
+        <div class="summary-card card">
+            <h4>Summary</h4>
+            <div class="summary-item">
+                <span>Quizzes Taken</span>
+                <strong>${userStats.quizzesTaken}</strong>
+            </div>
+            <div class="summary-item">
+                <span>Overall Score</span>
+                <strong><c:out value="${String.format('%.0f%%', userStats.averageScorePercentage)}"/></strong>
+            </div>
+            <div class="summary-item">
+                <span>Correct Answers</span>
+                <strong>${userStats.totalCorrectAnswers}</strong>
+            </div>
+        </div>
+    </div>
+</section>
         </main>
     </div>
-    <script>
-      feather.replace();
-    </script>
+   <script>
+    feather.replace();
+
+    // Data from our servlet
+    const correctAnswers = ${userStats.totalCorrectAnswers};
+    const totalQuestions = ${userStats.totalQuestionsAnswered};
+    const incorrectAnswers = totalQuestions - correctAnswers;
+
+    // Chart configuration
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    const performanceChart = new Chart(ctx, {
+        type: 'doughnut', // A nice modern chart type
+        data: {
+            labels: ['Correct Answers', 'Incorrect Answers'],
+            datasets: [{
+                label: 'Answer Breakdown',
+                data: [correctAnswers, incorrectAnswers],
+                backgroundColor: [
+                    '#BCD39C', // Your primary color
+                    '#f8d7da'  // The error color
+                ],
+                borderColor: [
+                    '#FFFFFF',
+                    '#FFFFFF'
+                ],
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Answer Correctness Breakdown'
+                }
+            }
+        }
+    });
+</script>
 </body>
 </html>

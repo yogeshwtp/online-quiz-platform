@@ -250,3 +250,595 @@ textarea.form-control {
     border-color: var(--error-border);
     color: var(--error-text);
 }
+/* --- Profile Statistics Styles --- */
+.stats-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Chart takes up 2/3, summary takes 1/3 */
+    gap: 1.5rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+.summary-item:last-child {
+    border-bottom: none;
+}
+.summary-item strong {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+/* --- Landing Page Styles --- */
+/* --- Global Settings & Variables (Updated for Teal Theme) --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {
+    /* Teal/Turquoise Palette */
+    --primary: #2ECC71; /* A vibrant green for accents */
+    --primary-dark: #27AE60;
+    --hero-bg-start: #235c75; /* Dark teal */
+    --hero-bg-end: #0e848f;   /* Bright teal */
+    --nav-bg: rgba(255, 255, 255, 0.1);
+    --text-hero: #FFFFFF;
+    --text-dark: #34495E; /* Dark gray for general text */
+    --text-light: #7F8C8D; /* Lighter gray for secondary text */
+    --white: #FFFFFF;
+    --light-gray: #ecf0f1; /* Very light gray */
+    --shadow: rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+
+    /* General App Colors (kept similar for consistency) */
+    --background: #F0FCEC; /* Light green for app pages */
+    --success-bg: #d4edda;
+    --success-border: #c3e6cb;
+    --success-text: #155724;
+    --error-bg: #f8d7da;
+    --error-border: #f5c6cb;
+    --error-text: #721c24;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background); /* Default for app pages */
+    color: var(--text-dark);
+}
+
+/* --- Main Application Layout (kept similar) --- */
+.app-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: var(--white);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--light-gray);
+}
+
+.main-content {
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+
+/* --- Sidebar Components (kept similar) --- */
+.sidebar-header h2 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.sidebar-nav {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.sidebar-nav .nav-item a {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.sidebar-nav .nav-item svg {
+    margin-right: 1rem;
+    width: 20px;
+}
+
+.sidebar-nav .nav-item.active a, .sidebar-nav .nav-item a:hover {
+    background-color: var(--background);
+    transform: translateX(5px);
+}
+
+.sidebar-footer a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+/* --- Main Content & General Components (kept similar) --- */
+.main-header h1 {
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 700;
+}
+
+.main-header p {
+    color: var(--text-light);
+}
+
+.card {
+    background: var(--white);
+    box-shadow: 0 4px 12px var(--shadow);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow);
+}
+
+/* Generic Button Styles (Adapted for the new theme) */
+.btn {
+    display: inline-block; /* Changed to inline-block for flex in hero-actions */
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.02);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--text-hero); /* Outline for secondary on dark background */
+    color: var(--text-hero);
+}
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+}
+
+
+hr {
+    border: none;
+    border-top: 1px solid var(--light-gray);
+    margin: 2rem 0;
+}
+
+/* --- Authentication Page Styles (Login & Register - kept similar) --- */
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--background); /* Keep login/register on the light app background */
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.error-message {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-border);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* --- Dashboard Page Styles (kept similar) --- */
+.dashboard-section {
+    margin-top: 2.5rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.lesson-card {
+    display: block;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+
+/* --- Quiz Page & Results Styles (kept similar) --- */
+.quiz-container {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.question-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+.question-block:last-child {
+    border-bottom: none;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.results-summary {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.submitted .option-label:not(.correct-answer):not(.incorrect-answer) {
+    opacity: 0.6;
+}
+
+.submitted .option-label.correct-answer {
+    background-color: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success-text);
+    font-weight: 700;
+}
+
+.submitted .option-label.incorrect-answer {
+    background-color: var(--error-bg);
+    border-color: var(--error-border);
+    color: var(--error-text);
+}
+
+/* --- Profile Statistics Styles (kept similar) --- */
+.stats-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+.summary-item:last-child {
+    border-bottom: none;
+}
+.summary-item strong {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+
+/* --- Landing Page Styles (Rebuilt to match the image) --- */
+
+.landing-body {
+    background-color: var(--hero-bg-start); /* Ensure the body itself is dark */
+    overflow-x: hidden; /* Prevent horizontal scroll from background elements */
+}
+
+.nav-container, .hero-content, .features-container, .landing-footer p {
+    max-width: 1200px; /* Slightly wider than before */
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Navigation Bar */
+.landing-nav {
+    padding: 1.5rem 0;
+    position: relative; /* To be above the hero-bg */
+    z-index: 100;
+}
+
+.landing-nav .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--text-hero); /* White text for logo */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-hero); /* White text for nav links */
+    margin-left: 2rem;
+    font-weight: 400; /* Lighter font weight */
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary); /* Hover effect */
+}
+
+.btn.btn-nav.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--text-hero); /* White outline */
+    color: var(--text-hero);
+    padding: 0.6rem 1.5rem;
+}
+.btn.btn-nav.btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Adjust based on nav height */
+    overflow: hidden; /* Hide parts of the background circles */
+    background: linear-gradient(135deg, var(--hero-bg-start) 0%, var(--hero-bg-end) 100%);
+    color: var(--text-hero);
+    text-align: left; /* Align text to the left as per image */
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Allows clicks to pass through */
+}
+
+.hero-bg::before,
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: moveCircle 10s infinite alternate;
+}
+
+.hero-bg::before {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #5ECEA9 0%, #15B8BB 100%); /* Bright teal */
+    top: -100px;
+    right: -200px;
+    transform: scale(0.8);
+    animation-delay: 0s;
+}
+
+.hero-bg::after {
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, #10777B 0%, #064A53 100%); /* Darker teal */
+    bottom: -300px;
+    left: -400px;
+    transform: scale(1.2);
+    animation-delay: 5s;
+}
+
+@keyframes moveCircle {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, 30px) scale(1.05); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+
+.hero-content {
+    position: relative; /* Ensure content is above background */
+    z-index: 10;
+    max-width: 600px; /* Limit width for main text block */
+    padding-top: 4rem; /* Add some top padding */
+    padding-bottom: 4rem;
+}
+
+.hero-main-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    animation: slideInLeft 1s ease-out;
+}
+
+.hero-sub-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+    animation: slideInLeft 1s ease-out 0.2s;
+    animation-fill-mode: both;
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 500px;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    animation: slideInLeft 1s ease-out 0.4s;
+    animation-fill-mode: both;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem; /* Space between buttons */
+    animation: fadeInUp 1s ease-out 0.6s;
+    animation-fill-mode: both;
+}
+
+/* Features Section - Adapted for new colors */
+.features-section {
+    padding: 5rem 0;
+    background-color: var(--white); /* White background for features */
+    color: var(--text-dark);
+    text-align: center; /* Center feature cards */
+}
+
+.features-section h2 { /* Optional: Add a section title for features */
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: 3rem;
+    color: var(--text-dark);
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background-color: var(--light-gray); /* Lighter card background */
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card svg {
+    width: 50px;
+    height: 50px;
+    color: var(--primary); /* Primary color for icons */
+    margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-dark);
+}
+
+.feature-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Landing Footer */
+.landing-footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: var(--text-dark); /* Dark background for footer */
+    color: rgba(255, 255, 255, 0.7); /* Light text */
+}
+
+/* Keyframe Animations */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .landing-nav .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .nav-links {
+        margin-top: 1rem;
+    }
+    .nav-links a {
+        margin: 0 0.5rem;
+    }
+    .hero-section {
+        text-align: center;
+        padding: 4rem 0;
+    }
+    .hero-content {
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .hero-actions {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-hero {
+        width: 80%;
+    }
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+    .hero-bg::before, .hero-bg::after {
+        width: 400px;
+        height: 400px;
+        opacity: 0.2;
+    }
+}

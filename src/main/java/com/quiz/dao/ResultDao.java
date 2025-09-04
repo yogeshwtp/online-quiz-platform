@@ -1,8 +1,8 @@
 package com.quiz.dao;
 
 import com.quiz.model.Result;
+import com.quiz.model.PerformanceStats;
 import com.quiz.util.DBConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,6 +62,42 @@ public class ResultDao {
             e.printStackTrace();
         }
         return results;
+    }
+ // In com.quiz.dao.ResultDao.java
+
+    public PerformanceStats getUserPerformanceStats(int userId) {
+        PerformanceStats stats = new PerformanceStats();
+        // This query calculates the total quizzes taken, sum of scores, and sum of total questions
+        String sql = "SELECT COUNT(*) as quizzesTaken, SUM(score) as totalCorrect, SUM(total_questions) as totalAnswered " +
+                     "FROM results WHERE user_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int quizzesTaken = rs.getInt("quizzesTaken");
+                int totalCorrect = rs.getInt("totalCorrect");
+                int totalAnswered = rs.getInt("totalAnswered");
+
+                stats.setQuizzesTaken(quizzesTaken);
+                stats.setTotalCorrectAnswers(totalCorrect);
+                stats.setTotalQuestionsAnswered(totalAnswered);
+
+                if (totalAnswered > 0) {
+                    // Calculate the average score as a percentage
+                    double average = ((double) totalCorrect / totalAnswered) * 100;
+                    stats.setAverageScorePercentage(average);
+                } else {
+                    stats.setAverageScorePercentage(0);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stats;
     }
 }
 
