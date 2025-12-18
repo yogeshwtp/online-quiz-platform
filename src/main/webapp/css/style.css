@@ -415,14 +415,15 @@ body {
     transform: scale(1.02);
 }
 
+/* Add this to css/style.css */
 .btn-secondary {
-    background-color: transparent;
-    border: 1px solid var(--text-hero); /* Outline for secondary on dark background */
-    color: var(--text-hero);
+    background-color: #6c757d; /* Grey color to differentiate from Start Quiz */
+    color: white;
+    margin-left: 10px; /* Space between buttons */
 }
+
 .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: scale(1.02);
+    background-color: #5a6268;
 }
 
 
@@ -840,5 +841,41 @@ textarea.form-control {
         width: 400px;
         height: 400px;
         opacity: 0.2;
+    }
+}
+
+/* --- PRINT STYLES: Only applied when printing or saving as PDF --- */
+@media print {
+    /* Hide the sidebar, buttons, and extra navigation */
+    .sidebar, 
+    .action-buttons, 
+    .sidebar-header,
+    .nav-item,
+    button,
+    a.btn {
+        display: none !important;
+    }
+
+    /* Make the main content full width */
+    .app-container {
+        display: block; /* Disable flexbox layout for print */
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    /* Ensure text is black for saving ink */
+    body, p, h1, h2, h3 {
+        color: black !important;
+        background: white !important;
+    }
+    
+    /* Remove shadows/borders to look like a document */
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
     }
 }
